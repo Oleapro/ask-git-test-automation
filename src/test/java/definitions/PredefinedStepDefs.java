@@ -222,4 +222,22 @@ public class PredefinedStepDefs {
     public void iMouseOverElementWithXpath(String xpath) {
         new Actions(getDriver()).moveToElement(getDriver().findElement(By.xpath(xpath))).perform();
     }
+
+    @And("I press Enter key")
+    public void iPressEnterKey() {
+        Actions keyDown = new Actions(getDriver()).keyDown(Keys.ENTER);
+        keyDown.perform();
+    }
+
+    @And("a new window should open")
+    public void aNewWindowOrTabShouldOpen() throws InterruptedException {
+        Thread.sleep(2000);
+        getDriver().getWindowHandles();
+    }
+
+    @And("I wait for the element with xpath {string} to be clickable")
+    public void iWaitForElementToBeClickable(String xpath){
+        getDriver().findElement(By.xpath("//button[@class='btn-search']"));
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
 }
